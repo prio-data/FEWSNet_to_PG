@@ -1,0 +1,39 @@
+## Glossary of FEWSNET Metadata
+
+Provide more context to field names derived from derived from: "https://fdw.fews.net/api/ipcphase.csv?start_date=2000-01-01&end_date=2024-12-31&classification_scale=IPC31"
+
+What differentiates the `unit_type` attributes?
+ANSWER: https://help.fews.net/fde/fews-net-api
+
+- fsc_admin
+- fsc_rm_admin
+- fsc_admin_lhz
+- idp_camp
+- national_park
+- fsc_rm_admin
+
+
+
+- **admin1**: First level administrative boundaries
+- **admin2**: Second level administrative boundaries
+- **fsc_admin**: Food Security Classification unit of analysis based on an Administrative Unit
+- **fsc_admin_lhz**: Food Security Classification unit of analysis based on the intersection of an Administrative Unit and a Livelihood Zone
+- **idp_camp**: Point location for internally displaced persons
+- **livelihood_zone**: Livelihood zone
+- **market**: Point location for market price data
+
+| **Attribute**    | **fsc_admin**                                         | **fsc_rm_admin**                                      |
+|-------------------|-------------------------------------------------------|------------------------------------------------------|
+| **Focus**         | Administrative level for food security classification | Administrative level for remote monitoring data      |
+| **Purpose**       | Indicates where IPC phases are classified             | Indicates where remote monitoring data is collected  |
+| **Granularity**   | Can vary from Admin0 to Admin3 or custom zones        | Typically coarser, often Admin0 or Admin1            |
+| **Use Case**      | For regions with ground-level data collection         | For regions with limited access or ground data       |
+
+
+Information on how `FNID` is structured:
+https://help.fews.net/fde/fews-net-ids-fnids
+
+In Afghanistan, FEWS NET maps FIC data using the intersection of Admin 2 (districts) and livelihood zones. The FNIDs for these intersect units are structured as follows:
+
+- So where do I access livelihood zones to get spatial boundaries?
+- where do I access IDP spatial boundaries (or other non admin boundaries)?
