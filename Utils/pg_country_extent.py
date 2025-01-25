@@ -23,7 +23,7 @@ def create_country_geodataframe(country_name, year, shapefile_path=None):
             shapefile_path = project_root / 'Data' / 'Processed' / 'extent_shapefile' / 'pg_viewser_extent.shp'
 
         # Load the shapefile
-            print()
+        print()
         print(f"Loading shapefile from: {shapefile_path}.")
         print(f'We will use this geodataframe to define an extent that matches global pg_ids to those located in {country_name}.')
         print()
