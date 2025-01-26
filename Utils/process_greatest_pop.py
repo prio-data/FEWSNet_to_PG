@@ -1,24 +1,51 @@
-
 def aggregate_by_greatest_population(df):
-    # Ensure proportional_population column exists and handle NaN
-    if 'Proportion_population' not in df.columns:
-        raise KeyError("Column 'proportional_population' is missing in the DataFrame.")
-    df['Proportion_population'] = df['Proportion_population'].fillna(0)
+    """
+    Aggregate values to PG-id resolution using either proportional population or proportional area.
+    
+    This function determines whether to use Proportional_population or Proportional_area for weighting
+    based on the presence of valid population data (non-zero max population proportion or total population).
 
-    # Find the row with the greatest population proportion for each pg_id
-    max_population_rows = df.loc[df.groupby('pg_id')['Proportion_population'].idxmax()]
+    Args:
+        df (pd.DataFrame): Input DataFrame with columns:
+            - pg_id: Priogrid identifier.
+            - Proportion_population: Proportional population per feature.
+            - Proportional_area: Proportional area per feature.
+            - feature_population: Feature-level population.
+            - Cell_population: Total priogrid cell population.
+            - value: Value to be aggregated.
 
-    # Create a dictionary to map the greatest population proportion row for each pg_id
-    max_population_dict = max_population_rows.set_index('pg_id').to_dict(orient='index')
+    Returns:
+        pd.DataFrame: Aggregated DataFrame at the `pg_id` level.
+    """
+    # Ensure necessary columns exist
+    required_columns = ['pg_id', 'Proportion_population', 'Proportional_area', 'feature_population', 'Cell_population', 'value']
+    for col in required_columns:
+        if col not in df.columns:
+            raise KeyError(f"Required column '{col}' is missing in the DataFrame.")
+    
+    # Fill NaN values with 0
+    df.fillna({'Proportion_population': 0, 'Proportional_area': 0, 'feature_population': 0, 'Cell_population': 0}, inplace=True)
 
-    # Apply the weighted value calculation directly within the DataFrame
+    # Create a dictionary to determine whether to use population or area for each pg_id
+    pg_decision = {}
+    grouped = df.groupby('pg_id')
+    
+    for pg_id, group in grouped:
+        max_population_proportion = group['Proportion_population'].max()
+        total_cell_population = group['Cell_population'].max()
+        
+        if max_population_proportion > 0 or total_cell_population > 0:
+            pg_decision[pg_id] = 'population'
+        else:
+            pg_decision[pg_id] = 'area'
+
+    # Apply the weighted value calculation based on the decision for each pg_id
     def calculate_weighted_value(row):
-        max_population_row = max_population_dict[row['pg_id']]
-        if max_population_row['feature_population'] > 0:  # If the greatest population proportion is valid
-            return row['Proportion_population'] * row['value'] if row['feature_population'] > 0 else 0
-        else:  # Fallback to proportional area if no population in pg_id
+        if pg_decision[row['pg_id']] == 'population':
+            return row['Proportion_population'] * row['value']
+        else:
             return row['Proportional_area'] * row['value']
-
+    
     # Add the weighted value column
     df['weighted_value'] = df.apply(calculate_weighted_value, axis=1)
 
