@@ -11,10 +11,26 @@ This repository contains tools and resources for translating FEWSNET data into t
 #### `/Data`
 - **`/External`**: Raw data files obtained from external sources. These are unprocessed and should remain unchanged.
 - **`/Processed`**: Cleaned and processed data files, ready for analysis or further manipulation.
+  - ** `/Processed/Population`**: Contains the population data retrieved from WorldPop for the desired year
+    - will countain global population datasets following the filename profile ppp_`year`_1km_Aggreagted.tif
+    - **`/Proccessed/ccountry_extent`**: So that the same population data can be recycled without reproducing it. 
+
+- **`External`**:
+  - **`/Processed/IPC`**: Contains the IPC file generated from the user defined parameters and sets the variable `ipc` within the `main.py` function.
 
 #### `/Docs`
 - **`/ADR`**: Architecture Decision Reports.
 - **`/EDA`**: Exploratory Data Analysis (EDA) outputs, including visualizations, descriptive statistics, and insights generated during the preprocessing stage.
+
+#### `/Notebooks`
+
+contains the file `procedure_outline.ipynb` which contains an updated workflow consistent with main.py and fewsnet_process.py (located in utils). This allows for checks and tests to be conducted in a safe space before incorporating improvements to the other functions which call upon this process.
+
+The primary purpose of producing the fewsnet_process.py file is functionality to work through the process within a notebook. 
+
+- **`\Tests`**
+  - `Ethiopia_pilot.ipynb`: supported much of the development and key considerations that are now featuring in the main.py script. This is kept primarily for posterity.
+  - `Process_Compariosn.ipynb`: This is a notebook that calls the primary function (fewsnet_process.py). Working in a notebook environment would allow a user to try out numerous different parameter combinations then reference their csv and plot examples to contrast the advantages and limitations of available processes.
 
 #### `/Reports`
 - Contains generated reports summarizing analysis results or findings related to the FEWSNET-PRIOGrid translation process.
