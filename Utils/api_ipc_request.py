@@ -1,9 +1,18 @@
 import requests
 import pandas as pd
+from pathlib import Path
 
 def construct_ipc_api_url(start_date, end_date, classification='IPC31'):
     # Base URL
     base_url = "https://fdw.fews.net/api/ipcphase.csv"
+
+    project_root = Path(__file__).resolve().parent.parent
+
+    #--------------------------------------
+    # Location to save geodataframe (as shapefile)
+    #--------------------------------------
+
+    ref_ipc_csv_path = project_root / 'Data' / 'External' / 'IPC' 
 
     # Parameters
     params = {
@@ -19,9 +28,9 @@ def construct_ipc_api_url(start_date, end_date, classification='IPC31'):
     print("Data downloaded and saved as ipc_data.csv to folder Data/Generated/ipc_data.csv")
     print()
     response = requests.get(url_csv, params=params)
-    with open("ipc_data.csv", "wb") as file:
+    with open(f"{ref_ipc_csv_path}/IPC_data.shp", "wb") as file:
         file.write(response.content)
 
-    ipc_data = pd.read_csv('ipc_data.csv')
+    ipc_data = pd.read_csv(f"{ref_ipc_csv_path}/IPC_data.shp")
     return(ipc_data)
 
