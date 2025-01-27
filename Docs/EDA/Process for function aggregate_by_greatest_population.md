@@ -19,8 +19,6 @@ This is considered by first identifying the max value within the 'feature_popula
 max_population_rows = df.loc[df.groupby('pg_id')['Proportion_population'].idxmax()]
 ```
 
-
-
 **Step 2:** Determine the Aggregation Metric (Population or Area)
 - Purpose: Decide whether Proportional_population or Proportional_area will be used for each pg_id.
 - Action:
@@ -82,3 +80,40 @@ aggregated_df.rename(columns={
 
 return aggregated_df
 ```
+
+**Advantages of this selection**
+
+*Simple Decision Rule:*
+- The function prioritizes rows with valid population data (Proportion_population) when available, making it straightforward and efficient.
+
+- Falls back to Proportional_area when no population data exists, ensuring that every pg_id has a calculated value.
+
+*Handles Missing Data Gracefully:*
+- Missing or NaN values in Proportion_population are replaced with 0, preventing errors during processing.
+
+*Efficient Aggregation:*
+- Aggregates values at the pg_id level, ensuring the output is concise and suitable for spatial analysis at a grid level.
+
+*Flexibility:*
+- The logic can easily adapt to other use cases by adjusting the weighting mechanism or thresholds for prioritization.
+
+*Clarity in Results:*
+- Outputs two columns (final_weighted_value and original_sum_value) to distinguish between the weighted calculation and the raw sum of values, aiding in interpretation.
+
+**limitations**
+
+*Ignores Magnitude of Population:*
+- It does not account for the absolute magnitude of the population in each pg_id. For example, a Proportion_population of 0.8 in a cell with 100 people is treated the same as 0.8 in a cell with 10,000 people.
+
+*Binary Decision Logic:*
+- The function strictly uses either Proportional_population or Proportional_area for each pg_id, without considering a combination of both metrics. This may oversimplify cases where both factors are relevant.
+
+*Sensitivity to Outliers:*
+If a single row within a pg_id has an unusually high Proportional_population, it could disproportionately influence the weighted value, potentially skewing results.
+
+*No Dynamic Population Weighting:*
+- Unlike other approaches (e.g., percentile-based weighting), it does not dynamically adjust weights based on relative population levels (e.g., 50th vs. 90th percentile).
+
+*Do other functions approach these limitations?*
+
+
