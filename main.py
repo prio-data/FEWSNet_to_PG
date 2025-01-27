@@ -68,11 +68,11 @@ print(list(ipc))
 #Print all country_codes:
 #country_code_list = sorted(ipc['country_code'].unique().tolist())
 
-ipc_country, selected_country_codes = select_country_codes(ipc)
-
-endyear = e.split('-')[0]
+endyear = int(e.split('-')[0])
 
 icp_country_result = plot_fewsnet_scenario_coverage(ipc, endyear)
+
+ipc_country, selected_country_codes = select_country_codes(ipc)
 
 process_selection = get_process_selection()
 
