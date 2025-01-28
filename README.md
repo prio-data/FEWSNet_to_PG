@@ -10,13 +10,12 @@ This repository contains tools and resources for translating FEWSNET data into t
 
 #### `/Data`
 - **`/External`**: Raw data files obtained from external sources. These are unprocessed and should remain unchanged.
+  - **`/External/IPC`**: Contains the IPC file generated from the user defined parameters and sets the variable `ipc` within the `main.py` function.
+
 - **`/Processed`**: Cleaned and processed data files, ready for analysis or further manipulation.
   - ** `/Processed/Population`**: Contains the population data retrieved from WorldPop for the desired year
     - will countain global population datasets following the filename profile ppp_`year`_1km_Aggreagted.tif
     - **`/Proccessed/ccountry_extent`**: So that the same population data can be recycled without reproducing it. 
-
-- **`External`**:
-  - **`/Processed/IPC`**: Contains the IPC file generated from the user defined parameters and sets the variable `ipc` within the `main.py` function.
 
 #### `/Docs`
 - **`/ADR`**: Architecture Decision Reports.
@@ -62,21 +61,12 @@ General date ranges associated with each IPC classification:
 #### Selecting an IPC Classification
 The Integrated Food Security Phase Classification (IPC) system has evolved through different versions (IPC2.0, IPC3.0, and IPC3.1). Each version corresponds to specific methodological updates and improvements. Here is an approximate range of dates typically associated with each IPC classification:
 
-IPC2.0
-Timeframe: ~2004–2012
-Details:
-IPC2.0 was one of the earlier versions widely adopted during this period.
-It established a standardized scale for classifying food security phases but lacked some of the refinements present in later versions.
-IPC3.0
-Timeframe: ~2013–2018
-Details:
-IPC3.0 introduced significant methodological improvements, including better-defined thresholds and improved guidelines for acute food insecurity analysis.
-It became the primary classification method for food security assessments during this period.
-IPC3.1
-Timeframe: ~2019–Present
-Details:
-IPC3.1 represents the latest iteration, with enhanced methodologies for acute food insecurity, chronic food insecurity, and malnutrition assessments.
-It has been widely adopted for recent analyses, with data available primarily from 2019 onward.
+| **IPC Version** | **Timeframe**   | **Details**                                                                                                                                         |
+|------------------|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| **IPC2.0**      | ~2004–2012      | IPC2.0 was one of the earlier versions widely adopted during this period. It established a standardized scale for classifying food security phases but lacked some of the refinements present in later versions. |
+| **IPC3.0**      | ~2013–2018      | IPC3.0 introduced significant methodological improvements, including better-defined thresholds and improved guidelines for acute food insecurity analysis. It became the primary classification method for food security assessments during this period. |
+| **IPC3.1**      | ~2019–Present   | IPC3.1 represents the latest iteration, with enhanced methodologies for acute food insecurity, chronic food insecurity, and malnutrition assessments. It has been widely adopted for recent analyses, with data available primarily from 2019 onward. |
+
 
 2. *Start Date:*
 
@@ -90,6 +80,25 @@ It has been widely adopted for recent analyses, with data available primarily fr
 
 The present status (Jan 27, 2025) allows for flexibility between the translation procedure from mapping the original resolution of FEWSNet data to the standard PRIOGRID Unit. 
 
+#### Resources for understanding the FEWSNet to PG translation
+**`/Docs/EDA`**
+
+-----CLEAN THIS UP-----
+A unique document has been developed for each process (function) modelled to assign the raw values, with unqique administrative boundaries, to the standard PG-Cell resolution. The file name references the python code function used for ease of access: `Process for function (function name)`:
+
+- *Docs/EDA/Process for function aggregate_by_greatest_population.md*
+- *Docs/EDA/Process for function process_pop_area_weights.md*
+- *Docs/EDA/.....md*
+- *Docs/EDA/.....md*
+- *Docs/EDA/.....md*
+- *Docs/EDA/.....md*
+- *Docs/EDA/.....md*
+
+In future versions of this repo, some of these methods may be removed to limit (constrain) available processes to more robust and rigorously tested options. 
+-----------CLEAN THIS UP------------
+
+
+
 7. *Do you want to generate IPC historical maps?:*
 
 8. *Enter one of the following options:*
@@ -98,10 +107,6 @@ The present status (Jan 27, 2025) allows for flexibility between the translation
     - Type 'Quit' to exit the program.
 
 9. Complete! You can reference the saved .csv file in the folder /<...>/FEWSnet/Data/Processed/csv
-
-
-#### Resources for understanding the FEWSNet to PG translation
-- Docs/EDA/<process>
 
 
 #### Instructions for ingesting to VIEWSER:
