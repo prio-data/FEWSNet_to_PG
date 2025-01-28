@@ -13,7 +13,7 @@ This repository contains tools and resources for translating FEWSNET data into t
   - **`/External/IPC`**: Contains the IPC file generated from the user defined parameters and sets the variable `ipc` within the `main.py` function.
 
 - **`/Processed`**: Cleaned and processed data files, ready for analysis or further manipulation.
-  - ** `/Processed/Population`**: Contains the population data retrieved from WorldPop for the desired year
+  - **`/Processed/Population`**: Contains the population data retrieved from WorldPop for the desired year
     - will countain global population datasets following the filename profile ppp_`year`_1km_Aggreagted.tif
     - **`/Proccessed/ccountry_extent`**: So that the same population data can be recycled without reproducing it. 
 
