@@ -3,6 +3,10 @@
 
 This repository contains tools and resources for translating FEWSNET data into the PRIOGrid resolution format. It includes scripts, data, and documentation to facilitate preprocessing, analysis, and ingestion into the VIEWSER system.
 
+### Purpose
+
+The utility of performing this translation to a standardized PRIOGrid resolution is to ensure consistency with other meaningful conflict datasets and align with the global grid architecture developed by the Peace Science Infrastructure research at the University of Oslo. By reformatting FEWSNET’s raw resolution, this process enables more rigorous spatial analyses in peace and conflict research, as well as humanitarian science. Standardizing food insecurity data within PRIOGrid enhances comparability across spatial datasets, allowing researchers to investigate correlations between food insecurity, conflict, and other geospatial factors with greater methodological rigor—particularly in the context of machine learning applications.
+
 ### Navigating the Repo (Structure):
 *Folders and Contents*. This information is also provided in a .md file present within each unique folder
 
@@ -27,7 +31,7 @@ contains the file `procedure_outline.ipynb` which contains an updated workflow c
 
 The primary purpose of producing the fewsnet_process.py file is functionality to work through the process within a notebook. 
 
-- **`\Tests`**
+- **`/Tests`**
   - `Ethiopia_pilot.ipynb`: supported much of the development and key considerations that are now featuring in the main.py script. This is kept primarily for posterity.
   - `Process_Compariosn.ipynb`: This is a notebook that calls the primary function (fewsnet_process.py). Working in a notebook environment would allow a user to try out numerous different parameter combinations then reference their csv and plot examples to contrast the advantages and limitations of available processes.
 
@@ -40,6 +44,12 @@ The primary purpose of producing the fewsnet_process.py file is functionality to
   - Resampling to PRIOGrid resolution
   - IPC classification handling
   - Population attribution
+
+### Dependencies and steps before proceeding to running the main function
+
+1. The user must have access to `viewser`
+2. With access, a connection to the VPN must be made
+3. *(do you require a FEWSNET login for the API?)*
 
 
 ### Overview of the process and main functions:
@@ -97,7 +107,7 @@ A unique document has been developed for each process (function) modelled to ass
 In future versions of this repo, some of these methods may be removed to limit (constrain) available processes to more robust and rigorously tested options. 
 -----------CLEAN THIS UP------------
 
-
+Simplest to explain and process: *Select process **4***
 
 7. *Do you want to generate IPC historical maps?:*
 
@@ -108,6 +118,18 @@ In future versions of this repo, some of these methods may be removed to limit (
 
 9. Complete! You can reference the saved .csv file in the folder /<...>/FEWSnet/Data/Processed/csv
 
+#### With this awareness of the embedded processes, execute the `main.py` function:
+***In command line:***
+
+``` 
+conda activate viewser
+```
+- Navigate to the repos base directory
+- Execute the primary function
+
+``` 
+python main.py
+```
 
 #### Instructions for ingesting to VIEWSER:
 
