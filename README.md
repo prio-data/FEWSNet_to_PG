@@ -5,10 +5,10 @@ This repository contains tools and resources for translating FEWSNET data into t
 
 ### Purpose
 
-The utility of performing this translation to a standardized PRIOGrid resolution is to ensure consistency with other meaningful conflict datasets and align with the global grid architecture developed by the Peace Science Infrastructure research at the University of Oslo. By reformatting FEWSNET’s raw resolution, this process enables more rigorous spatial analyses in peace and conflict research, as well as humanitarian science. Standardizing food insecurity data within PRIOGrid enhances comparability across spatial datasets, allowing researchers to investigate correlations between food insecurity, conflict, and other geospatial factors with greater methodological rigor—particularly in the context of machine learning applications.
+The utility of performing this translation to a standardized PRIOGrid resolution is to ensure consistency with other meaningful conflict datasets and align with the global grid architecture developed by the Peace Science Infrastructure research at the University of Oslo. By reformatting FEWSNET’s raw resolution, this process enables more rigorous spatial analyses in peace and conflict research, as well as social and political science. Standardizing food insecurity data within PRIOGrid enhances comparability across spatial datasets, allowing researchers to investigate correlations between food insecurity, conflict, and other geospatial variables with greater methodological rigor in a format that enables machine learning applications.
 
 ### Navigating the Repo (Structure):
-*Folders and Contents*. This information is also provided in a .md file present within each unique folder
+Each folder contains a corresponding `.md` file with more details on its contents and functionality.
 
 #### Folders and Contents
 
@@ -29,7 +29,7 @@ The utility of performing this translation to a standardized PRIOGrid resolution
 
 contains the file `procedure_outline.ipynb` which contains an updated workflow consistent with main.py and fewsnet_process.py (located in utils). This allows for checks and tests to be conducted in a safe space before incorporating improvements to the other functions which call upon this process.
 
-The primary purpose of producing the fewsnet_process.py file is functionality to work through the process within a notebook. 
+The primary purpose of producing the fewsnet_process.py file is functionality to work through the process within a notebook. `fewsnet_process.py` enables the process to be run iteratively, allowing functions to be called multiple times within a notebook. This facilitates comparisons between outputs generated with different parameter specifications, ensuring that methodological adjustments are systematically evaluated before being finalized.
 
 - **`/Tests`**
   - `Ethiopia_pilot.ipynb`: supported much of the development and key considerations that are now featuring in the main.py script. This is kept primarily for posterity.
@@ -77,18 +77,27 @@ The Integrated Food Security Phase Classification (IPC) system has evolved throu
 | **IPC3.0**      | ~2013–2018      | IPC3.0 introduced significant methodological improvements, including better-defined thresholds and improved guidelines for acute food insecurity analysis. It became the primary classification method for food security assessments during this period. |
 | **IPC3.1**      | ~2019–Present   | IPC3.1 represents the latest iteration, with enhanced methodologies for acute food insecurity, chronic food insecurity, and malnutrition assessments. It has been widely adopted for recent analyses, with data available primarily from 2019 onward. |
 
-
 2. *Start Date:*
+Provide a start date in the format MM-DD-YY
 
 3. *End Date:*
+Provide an end date in the format MM-DD-YY
 
 4. *Do you want to generate an IPC completeness graphic:*
+This graphic will provide a perspective on the spatial and temporal data availability within the date range criteria entered and IPC Classification. 
 
 5. *Enter one or more country codes seperated by commas, or type 'All' to select all countries:*
+You will see a list of country codes associated with country names printed as a dictionary
+
+``` 
+
+```
+As the prompt suggests, if your intention is to iterate through **All** available countries (considering the classification and time parameters entered) enter the string 'All' in the command line. You may also select one or multiple countries within the available dictionary. If you wish to select multiple, follow this format: ET, YE, KN
+*where ET provides data for Ethiopia, YE for Yemen, and KN for Kenya*
 
 6. *Please select a process: 1, 2, 3, 4, 5, or 6 (default: 6)*
 
-The present status (Jan 27, 2025) allows for flexibility between the translation procedure from mapping the original resolution of FEWSNet data to the standard PRIOGRID Unit. 
+The present status (Jan 27, 2025) allows for flexibility between the translation procedure from mapping the original resolution of FEWSNet data to the standard PRIOGRID Unit. There are several processes developed to demonstrate 
 
 #### Resources for selecting a process and understanding tool functionality
 #### `/Docs/EDA`
@@ -98,16 +107,15 @@ A unique document has been developed for each process (function) modelled to ass
 
 - *Docs/EDA/Process for function aggregate_by_greatest_population.md*
 - *Docs/EDA/Process for function process_pop_area_weights.md*
-- *Docs/EDA/.....md*
-- *Docs/EDA/.....md*
-- *Docs/EDA/.....md*
-- *Docs/EDA/.....md*
-- *Docs/EDA/.....md*
+- *Docs/EDA/Process for function assign_combined_threshold*
+- *Docs/EDA/Process for calculate_area_weighted_values.md* 
+- *Docs/EDA/Process for assign_majority_overlap.md* 
+- *Docs/EDA/Process for assign_max_above_threshold.md* 
 
-In future versions of this repo, some of these methods may be removed to limit (constrain) available processes to more robust and rigorously tested options. 
------------CLEAN THIS UP------------
+In future versions of this repo, some of these methods may be removed to constrain available processes to more robust and rigorously tested options. 
 
 Simplest to explain and process: *Select process **4***
+Most robust measure: *Select process **6***
 
 7. *Do you want to generate IPC historical maps?:*
 
