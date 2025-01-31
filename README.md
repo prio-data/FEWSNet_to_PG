@@ -8,13 +8,13 @@ Garrett Benz
 [garben@prio.org](mailto:garben@prio.org)
 
 **Team:**  
-VIEWS Research  
+VIEWS Research <br>
 [Pvesco@prio.org](mailto:paoves@prio.org)
 
-VIEWS MD&D
+VIEWS MD&D <br>
 [jim.dale@pcr.uu.se](mailto:jim.dale@pcr.uu.se)
 
-VIEWS Outreach
+VIEWS Outreach <br>
 [angelica.l.mcgowan@pcr.uu.se](mailto:angelica.l.mcgowan@pcr.uu.se)
 
 # FEWSNET to PrioGrid Data Processing
