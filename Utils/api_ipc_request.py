@@ -13,6 +13,7 @@ def construct_ipc_api_url(start_date, end_date, classification='IPC31'):
     #--------------------------------------
 
     ref_ipc_csv_path = project_root / 'Data' / 'External' / 'IPC' 
+    print(f'saving to folder: {ref_ipc_csv_path}')
 
     # Parameters
     params = {
@@ -25,12 +26,14 @@ def construct_ipc_api_url(start_date, end_date, classification='IPC31'):
     url_csv = f"{base_url}?start_date={params['start_date']}&end_date={params['end_date']}&classification_scale={params['classification_scale']}"
     print(f'The API call constructed: {url_csv}')
     print()
-    print("Data downloaded and saved as ipc_data.csv to folder Data/Generated/ipc_data.csv")
+    print("Data downloaded and saved as ipc_data.csv to folder Data/External/ipc_data.csv")
     print()
     response = requests.get(url_csv, params=params)
-    with open(f"{ref_ipc_csv_path}/IPC_data.shp", "wb") as file:
+    print(response.text[:500])  # Print first 500 characters to see if it's a valid CSV
+
+    with open(f"{ref_ipc_csv_path}/ipc_data.csv", "wb") as file:
         file.write(response.content)
 
-    ipc_data = pd.read_csv(f"{ref_ipc_csv_path}/IPC_data.shp")
+    ipc_data = pd.read_csv(f"{ref_ipc_csv_path}/ipc_data.csv", delimiter=",")  # Adjust as needed
     return(ipc_data)
 
