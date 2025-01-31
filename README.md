@@ -53,9 +53,9 @@ The primary purpose of producing the fewsnet_process.py file is functionality to
 
 
 ### Overview of the process and main functions:
-The user is requested to supply a response to a series of prompts that will influence the progression of the code.
+By running the `main.py` function, the user is requested to supply a response to a series of prompts that will influence the progression of the code.
 
-These are the questions that will be presented and an overview of how to enter an appropriate and informed response:
+These are the questions that will be presented within the function, allowing the user to make informed judgments, along with an overview of how to enter an appropriate and well-informed response.
 
 1.  *Please choose an IPC classification from the options above.*
 
@@ -141,13 +141,42 @@ python main.py
 
 #### Instructions for ingesting to VIEWSER:
 
-run for all countries + all dates -- will iterate over IPC20, IPC30, and IPC31
+Run `main.py` three times, selecting between IPC 2.0, IPC 3.0, and IPC 3.1.
+- The floor date ranges should follow the guide table provided above
+  - To be conservative, you may designate `2024-12-31` as the end date for all IPC classifications to ensure the most recent data is retrieved. 
+- In each process, enter criteria to iterate the scirpt over `All` countries.
+- This will provide three csv files which can be referenced for ingestion into `viewser`.
 
-There is not expected to be any overlap between these, but if so, the updated classification will take priority. 
+There is not expected to be any overlap between the IPC classification dates, but if this appears **the updated classification should take priority.**
+
+
+#### Update interval:
+**Six month periodic updates are recommended**
+
+FEWSNET updates are performed infrequently, and a six-month maintenance update is recommended. To facilitate this, the repository administrator should input the latest ingestion date (e.g., 2024-12-31) as the start date and set the end date six months later.
 
 #### How to contribute:
 
-most revisions or new contributions are expected to be situated within the usere_defined_process function. 
+Most revisions or new contributions are expected to be situated within the `user_defined_process`  function. 
+
+This repository should not require much maintainence. **Anticipated errors may center around an API call.** If this occurs:
+
+- Consult the FEWSNET website. *Note: As of Jan. 31, 2025 this portal is offline*
+- A base API call looks like:
+```
+base_url = "https://fdw.fews.net/api/ipcphase.csv"
+```
+- We then add key features to assemble a database for use at VIEWS
+
+```
+url_csv = f"{base_url}?start_date={params['start_date']}&end_date={params['end_date']}&classification_scale={params['classification_scale']}"
+```
+**More information on this script can be found in the function:** `Utils/api_ipc_request.py`
+
+*If a new process is developed*
+
+1. Save the .py function the to the `Utils` folder
+2. Ensure this new process communicates to the user selection in: `Utils/select_process.py`
 
 
 #### Dictionary of resources -- responding to basic questions
@@ -156,6 +185,15 @@ most revisions or new contributions are expected to be situated within the usere
 - consult access poplation resource.py and cumulative population attribution.py
 
 
--- how to aggregate to country level 
-- we recommend just taking the average - there is already a country_id mapped to the data.
+2. how to aggregate to country level 
+- VIEWS recommends taking average of `pgm` level data - there is already a country_id mapped to the data. This can be accomplished throught the `viewser6` architecture by developing a country level aggregation Querset. This looks like: my_new_queryset = `(Queryset(“sensible_name”, **"country_month"**)...)` 
+
+```
+my_new_queryset = (Queryset(“sensible_name”, "country_month") 
+               .with_column(Column(<enter fewsnet column name for dataframe>", 
+                  from_loa=“priogrid_month”, 
+                  from_column=<enter original fewsnet column name uploaded to the server>) 
+                            ) 
+               )
+```
 
