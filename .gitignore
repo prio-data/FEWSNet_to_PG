@@ -7,10 +7,16 @@
 # Compiled Python files
 __pycache__/
 
-# Processed data files
-Data/Processed/
+# Ignore everything inside the specified folders
+Data/Processed/*
+Data/External/*
+FEWSNET_World_Admin/*
 
-# External data files
-Data/External/
-FEWSNET_World_Admin/
+# Allow all .md files at any depth inside these folders
+!Data/Processed/
+!Data/External/
+!FEWSNET_World_Admin/
 
+!Data/Processed/**/*.md
+!Data/External/**/*.md
+!FEWSNET_World_Admin/**/*.md

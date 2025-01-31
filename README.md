@@ -120,7 +120,6 @@ The present status (Jan 27, 2025) allows for flexibility between the translation
 #### Resources for selecting a process and understanding tool functionality
 #### `/Docs/EDA`
 
------CLEAN THIS UP-----
 A unique document has been developed for each process (function) modelled to assign the raw values, with unqique administrative boundaries, to the standard PG-Cell resolution. The file name references the python code function used for ease of access: `Process for function (function name)`:
 
 - *Docs/EDA/Process for function aggregate_by_greatest_population.md*
