@@ -1,4 +1,22 @@
 
+![Project Banner](https://pbs.twimg.com/profile_banners/1237000633896652800/1717069203/1500x500)
+
+## Contact
+
+**Project Owner:**  
+Garrett Benz  
+[garben@prio.org](mailto:garben@prio.org)
+
+**Team:**  
+VIEWS Research  
+[Pvesco@prio.org](mailto:paoves@prio.org)
+
+VIEWS MD&D
+[jim.dale@pcr.uu.se](mailto:jim.dale@pcr.uu.se)
+
+VIEWS Outreach
+[angelica.l.mcgowan@pcr.uu.se](mailto:angelica.l.mcgowan@pcr.uu.se)
+
 # FEWSNET to PrioGrid Data Processing
 
 This repository contains tools and resources for translating FEWSNET data into the PRIOGrid resolution format. It includes scripts, data, and documentation to facilitate preprocessing, analysis, and ingestion into the VIEWSER system.
